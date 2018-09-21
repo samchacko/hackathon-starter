@@ -1,17 +1,23 @@
 language: node_js
 node_js:
   - "8"
-  - "9"
-services: mongodb  
-cache:  
+services: mongodb
+cache:
   directories:
     - "node_modules"
 sudo: false
 install:
   - npm install
 script:
-  - npm run lint
   - npm test
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: chmod +x ./deploy.sh && ./deploy.sh
+    on:
+      branch: master
+
+
 # added by Sam Chacko (all commeneted out as same as alreadythere.)
 # .travis.yml file
 # language: node_js
@@ -25,4 +31,20 @@ script:
 # install:
 #  -npm install
 # script:
+#  - npm test
+
+# what was there initally
+# language: node_js
+# node_js:
+#  - "8"
+#  - "9"
+# services: mongodb  
+# cache:  
+#  directories:
+#    - "node_modules"
+# sudo: false
+# install:
+#  - npm install
+# script:
+#  - npm run lint
 #  - npm test
